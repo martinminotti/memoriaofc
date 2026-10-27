@@ -91,7 +91,7 @@ a{color:inherit}
 .hero-mark .wm{width:min(78vw,1180px);color:var(--ink)}
 .hero-card{position:absolute;inset:0;z-index:2;overflow:hidden;background:#d9692e;
   clip-path:inset(var(--ct,30%) var(--cs,16px) var(--cb,16px) var(--cs,16px) round var(--cr,24px));will-change:clip-path}
-.hero-card img,.hero-gl{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform:translate3d(0,var(--iy,0px),0) scale(var(--is,1.16));transform-origin:50% 50%;will-change:transform}
+.hero-card img,.hero-gl{position:absolute;left:0;right:0;width:100%;top:calc(50% - max(50%, 40vw));height:max(100%, 80vw);object-fit:cover;object-position:50% 50%;transform:translate3d(0,var(--iy,0px),0) scale(var(--is,1.08));transform-origin:50% 50%;will-change:transform}
 .hero-gl{opacity:0;transition:opacity 1.6s var(--ease-out)}
 .hero-gl.on{opacity:1}
 .hero-card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,0) 50%,rgba(40,6,0,.5) 100%);pointer-events:none}
@@ -279,7 +279,7 @@ a{color:inherit}
   .hero-mark .wm{width:100%}
   .hero-card{position:relative;inset:auto;flex:none;width:100%;aspect-ratio:9/10;max-height:70svh;
     clip-path:inset(var(--cb,0px) var(--cs,16px) var(--cb,0px) var(--cs,16px) round var(--cr,20px))}
-  .hero-card img,.hero-gl{transform:scale(var(--is,1.04));transform-origin:50% 50%;object-position:52% 50%}
+  .hero-card img,.hero-gl{top:0;height:100%;transform:scale(var(--is,1.04));transform-origin:50% 50%;object-position:52% 50%}
   .hero-meta{flex-direction:row;align-items:flex-end}
   .hero-meta p{font-size:1.0625rem;max-width:22ch}
   .scroll-cue{display:none}
@@ -735,8 +735,19 @@ a{color:inherit}
         heroCard.style.setProperty('--cs', side + 'px');
         heroCard.style.setProperty('--cb', side + 'px');
         heroCard.style.setProperty('--cr', lerp(Math.min(28, vw * 0.03), 0, e) + 'px');
-        heroCard.style.setProperty('--is', lerp(1.16, 1.0, inOut(range(p, 0, 0.9))));
-        heroCard.style.setProperty('--iy', ((top - side) / 2) + 'px'); // keep the photo centred in the visible card
+        // Frame the trio (focal point a third of the way down the photo) in the middle of whatever part of the card is visible,
+        // never letting the photo's edges show.
+        const s = lerp(1.08, 1.0, inOut(range(p, 0, 0.9)));
+        const H = heroCard.clientHeight, W = heroCard.clientWidth;
+        const ia = (heroImg.naturalWidth / heroImg.naturalHeight) || 1.25;
+        const Dh = Math.max(H, W / ia) * s;
+        const visTop = top, visBot = H - side;
+        let ty = (visTop + visBot) / 2 - ((H - Dh) / 2 + lerp(0.33, 0.42, e) * Dh);
+        const imgTop = (H - Dh) / 2 + ty;
+        if (imgTop > visTop) ty -= imgTop - visTop;
+        if (imgTop + Dh < visBot) ty += visBot - (imgTop + Dh);
+        heroCard.style.setProperty('--is', s);
+        heroCard.style.setProperty('--iy', ty + 'px');
         const m = inOut(range(p, 0, 0.55));
         heroMark.style.opacity = 1 - m;
         heroMark.style.transform = `translate3d(0,${-m * 40}px,0) scale(${1 - m * 0.05})`;
@@ -802,7 +813,11 @@ a{color:inherit}
     const gl = c.getContext('webgl', { alpha: false, antialias: false, premultipliedAlpha: false, powerPreference: 'low-power' });
     if (!gl) return;
     const VS = 'attribute vec2 p;varying vec2 v;void main(){v=vec2(p.x*.5+.5,.5-p.y*.5);gl_Position=vec4(p,0.,1.);}';
-    const FS = `precision mediump float;
+    const FS = `#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
 varying vec2 v;uniform sampler2D t;uniform vec2 sc,of;uniform float tm,amp;
 float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}
@@ -810,8 +825,8 @@ void main(){
   vec2 uv=(v-.5)*sc+.5+of;
   float a=n(vec2(uv.y*2.4,tm*.10));
   float b=n(uv*vec2(1.6,3.)+vec2(tm*.05,-tm*.03));
-  vec2 d=vec2((a-.5)*.016,(b-.5)*.005)*amp;
-  float s=(.0012+.0024*a)*amp;
+  vec2 d=vec2((a-.5)*.007,(b-.5)*.002)*amp;
+  float s=(.0006+.0011*a)*amp;
   vec3 c=vec3(0.);float w=0.;
   for(int i=-3;i<=3;i++){float fi=float(i);float k=1.-abs(fi)*.22;c+=texture2D(t,clamp(uv+d+vec2(fi*s,0.),.001,.999)).rgb*k;w+=k;}
   c/=w;
@@ -831,12 +846,12 @@ void main(){
     const src = new Image(); src.decoding = 'async'; src.src = heroImg.currentSrc || heroImg.src;
     let ready = false, visible = true, raf = 0, t0 = performance.now(), amp = 1, ampT = 1, lastY = scrollY, lastT = t0;
     function size() {
-      const r = heroCard.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, vw <= 760 ? 1.5 : 1.25);
+      const r = { width: c.clientWidth, height: c.clientHeight }, dpr = Math.min(devicePixelRatio || 1, 2);
       const W = Math.max(1, Math.round(r.width * dpr)), H = Math.max(1, Math.round(r.height * dpr));
       if (c.width !== W || c.height !== H) { c.width = W; c.height = H; gl.viewport(0, 0, W, H); }
       const ia = src.naturalWidth / src.naturalHeight, ca = W / H;
       const sx = ca > ia ? 1 : ca / ia, sy = ca > ia ? ia / ca : 1;
-      const px = vw <= 760 ? 0.52 : 0.5, py = vw <= 760 ? 0.5 : 0.45;
+      const px = vw <= 760 ? 0.52 : 0.5, py = 0.5;
       gl.uniform2f(U.sc, sx, sy); gl.uniform2f(U.of, (px - 0.5) * (1 - sx), (py - 0.5) * (1 - sy));
     }
     function frame(now) {
@@ -844,7 +859,7 @@ void main(){
       if (!ready || !visible || document.hidden) return;
       const dt = Math.max(1, now - lastT); lastT = now;
       const y = scrollY, vel = Math.abs(y - lastY) / dt * 1000; lastY = y;
-      ampT = Math.max(ampT * 0.94, 1 + Math.min(vel / 1600, 1) * 1.4);
+      ampT = Math.max(ampT * 0.94, 1 + Math.min(vel / 1600, 1) * 0.8);
       amp += (ampT - amp) * 0.1;
       gl.uniform1f(U.tm, (now - t0) / 1000); gl.uniform1f(U.amp, amp);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
