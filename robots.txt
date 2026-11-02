@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://martinminotti.github.io/memoriaofc/sitemap.xml
+Sitemap: https://memoriaofc.com/sitemap.xml
