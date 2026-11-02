@@ -128,8 +128,9 @@ a{color:inherit}
 .statement{font-size:clamp(2.6rem,6.2vw,6.25rem);line-height:.98;letter-spacing:-.045em;font-weight:600;margin:0}
 .statement span{display:block;width:max-content;max-width:100%;opacity:var(--a,.12);padding-bottom:.04em}
 .st-sub{margin-top:clamp(24px,3vw,40px);color:#a1a1a6;opacity:var(--a,0)}
-.st-copy{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,2.4vw,32px);max-width:640px;font-size:.9375rem;line-height:1.55}
+.st-copy{max-width:62ch;font-size:1rem;line-height:1.6;letter-spacing:-.003em}
 .st-copy p{margin:0}
+.st-copy p+p{margin-top:1em}
 /* The one photograph: a full-bleed sheet that rises over the pinned statement */
 .photo{background:#e4e4e4;overflow:hidden}
 .photo figure{margin:0;position:relative}
@@ -244,7 +245,8 @@ a{color:inherit}
   .bio .frame img{aspect-ratio:4/5;object-position:58% 60%}
   .statement-sec{height:320svh}
   .st-grid{grid-template-columns:1fr;gap:4px}
-  .st-copy{grid-template-columns:1fr;gap:12px;font-size:.84rem;line-height:1.5}
+  .st-copy{font-size:.84rem;line-height:1.5}
+  .st-copy p+p{margin-top:.75em}
   .statement{font-size:clamp(2.2rem,11vw,3rem)}
   .photo img{height:auto;aspect-ratio:4/5;object-position:62% 40%}
   .ring{order:-1;width:min(46vw,34svh)}
