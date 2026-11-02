@@ -132,7 +132,7 @@ a{color:inherit}
 .st-copy p{margin:0}
 .st-copy p+p{margin-top:1em}
 /* The one photograph: a full-bleed sheet that rises over the pinned statement */
-.photo{background:#e4e4e4;overflow:hidden}
+.photo{background:#e4e4e4;overflow:clip}
 .photo figure{margin:0;position:relative}
 .photo img{width:100%;height:100svh;object-fit:cover;object-position:50% 40%;transform:scale(var(--ps,1.08));transform-origin:50% 40%;will-change:transform}
 .photo .cap{position:absolute;left:var(--gutter);bottom:clamp(18px,3vw,36px);display:flex;gap:18px;align-items:baseline;color:#fff;mix-blend-mode:difference}
@@ -248,7 +248,10 @@ a{color:inherit}
   .st-copy{font-size:.84rem;line-height:1.5}
   .st-copy p+p{margin-top:.75em}
   .statement{font-size:clamp(2.2rem,11vw,3rem)}
-  .photo img{height:auto;aspect-ratio:4/5;object-position:62% 40%}
+  /* Phones: the photo pins full-screen and pans left→right as you keep scrolling, so all three are seen */
+  .photo{height:200svh}
+  .photo figure{position:sticky;top:0;height:100svh;overflow:hidden}
+  .photo img{width:auto;max-width:none;height:100%;aspect-ratio:6444/5155;object-fit:cover;transform:translate3d(var(--px,0px),0,0) scale(var(--ps,1));transform-origin:0 50%}
   .ring{order:-1;width:min(46vw,34svh)}
   .row{grid-template-columns:1fr 40px;gap:6px 14px;padding:18px 0}
   .row .h{grid-column:1;grid-row:2;font-size:.875rem}
@@ -272,6 +275,7 @@ a{color:inherit}
   .scroll-cue .ln::after{animation:none}
   .js .lead .w{--o:1}
   .frame{clip-path:none}.frame img,.photo img{transform:none}
+  @media (max-width:760px){.photo{height:auto}.photo figure{position:relative;height:auto}.photo img{width:100%;height:auto;aspect-ratio:4/5;object-position:62% 40%}}
   .wm-box{clip-path:none}.wm-inner{transform:none}
 }
 @media (prefers-reduced-transparency:reduce){
@@ -514,6 +518,7 @@ a{color:inherit}
   const sHero = spring(0, SC), sSt = spring(0, SC), sHeroCov = spring(0, SC), sStCov = spring(0, SC), sStIn = spring(0, { response: 0.4, damping: 1 });
   const heroStage = $('.hero-stage'), stStage = $('.st-stage');
   const sFrames = frames.map(() => spring(0, S));
+  const sPan = spring(0, { response: 0.3, damping: 1 });
   const sLive = spring(0, S), sMark = spring(0, { response: 0.35, damping: 1 }), sLead = spring(0, { response: 0.3, damping: 1 });
   const sPillX = spring(0, { response: 0.35, damping: 0.86 }), sPillW = spring(0, { response: 0.35, damping: 0.86 }), sPillO = spring(0, { response: 0.3, damping: 1 });
   // light across the chrome: driven by scroll, nudged by the pointer
@@ -540,6 +545,7 @@ a{color:inherit}
       sStIn.set(clamp((vh - st.getBoundingClientRect().top) / vh)); }
     frames.forEach((f, i) => { const r = f.getBoundingClientRect(); sFrames[i].set(clamp((vh - r.top) / (vh * 0.9))); });
     sLive.set(through(photoImg));
+    { const sec = photoImg.closest('.photo'), r = sec.getBoundingClientRect(); sPan.set(clamp(-r.top / Math.max(1, r.height - vh))); }
     { const r = wmBox.getBoundingClientRect(); sMark.set(clamp((vh - r.top) / (vh * 0.75))); }
     { const r = lead.getBoundingClientRect(); sLead.set(clamp((vh * 0.82 - r.top) / (r.height + vh * 0.35))); }
 
@@ -645,7 +651,15 @@ a{color:inherit}
       tintV.style.setProperty('--to', 0.42 * range(p, 0.52, 0.66));
     }
 
-    photoImg.style.setProperty('--ps', lerp(1.08, 1, inOut(range(sLive.value, 0, 0.5))));
+    if (mobile) {
+      // Pan across the trio while the photo is pinned; a short hold at each end
+      const over = Math.max(0, photoImg.offsetWidth - vw);
+      photoImg.style.setProperty('--px', (-over * inOut(range(sPan.value, 0.08, 0.92))) + 'px');
+      photoImg.style.setProperty('--ps', 1);
+    } else {
+      photoImg.style.setProperty('--px', '0px');
+      photoImg.style.setProperty('--ps', lerp(1.08, 1, inOut(range(sLive.value, 0, 0.5))));
+    }
     { const m = sMark.value, e = reveal(range(m, 0, 0.6));
       wmBox.style.setProperty('--wc', lerp(100, 0, e) + '%');
       wmInner.style.setProperty('--my', lerp(36, 0, e) + '%'); }
