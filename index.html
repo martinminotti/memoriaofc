@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MEMORIA — Melodic &amp; Progressive House</title>
+<title>MEMORIA — Progressive house collective from Italy</title>
 <meta name="description" content="MEMORIA is the artistic convergence of three Italian DJs, producers and musicians: Delayers, Jamis and sorrynotsimon. Melodic and Progressive House exploring sound, emotion and memory.">
 <meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
 <meta property="og:title" content="MEMORIA">
-<meta property="og:description" content="Sound, emotion and memory. Melodic &amp; Progressive House trio from Italy.">
+<meta property="og:description" content="Progressive house collective from Italy.">
 <meta property="og:image" content="assets/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <script>(function(){var d=matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=d?'dark':'light';var m=document.querySelector('meta[name=theme-color]');if(m)m.content=d?'#000000':'#ffffff';})();</script>
@@ -56,7 +56,7 @@ a{color:inherit}
 .press:active{transform:scale(.97);transition-duration:.1s}
 
 /* ---------- Header: translucent material + scroll-edge mask ---------- */
-.bar{position:fixed;inset:0 0 auto 0;z-index:50;display:grid;grid-template-columns:auto auto 1fr auto auto;align-items:center;gap:clamp(12px,2.4vw,40px);
+.bar{position:fixed;inset:0 0 auto 0;z-index:50;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:clamp(12px,2.4vw,40px);
   padding:12px var(--gutter);padding-top:max(12px,env(safe-area-inset-top));font-weight:700;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink);transition:color .5s var(--ease-out)}
 .bar::before{content:"";position:absolute;inset:0 0 -18px 0;z-index:-1;pointer-events:none;opacity:0;
   background:rgba(233,233,233,.72);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
@@ -82,7 +82,6 @@ a{color:inherit}
 .reveal.in{opacity:1;filter:none}
 .reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}
 .no-js .reveal{opacity:1;filter:none}
-.display{margin:0 0 clamp(28px,3vw,44px);font-size:clamp(2.6rem,6.6vw,6.75rem);line-height:.92;letter-spacing:-.048em;font-weight:600}
 
 /* ---------- 01 Hero (pinned) ---------- */
 .hero{height:270svh;background:#000}
@@ -109,16 +108,14 @@ a{color:inherit}
 /* ---------- 02 Bio ---------- */
 /* Sections arrive as sheets over the pinned scene before them */
 .sheet{position:relative;z-index:3;margin-top:-100svh;border-radius:var(--radius) var(--radius) 0 0;box-shadow:0 -24px 60px -24px rgba(0,0,0,.35)}
-.bio{padding:clamp(96px,14vw,200px) 0 0;background:var(--paper)}
+.bio{padding:clamp(96px,14vw,200px) 0;background:var(--paper);min-height:100svh;display:flex;align-items:center}
+.bio>.wrap{width:100%}
 .bio-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter);align-items:start}
 .bio-head{grid-column:1/4}
 .bio-text{grid-column:4/12}
 .lead{margin:0;font-size:clamp(1.6rem,3.2vw,3rem);line-height:1.1;letter-spacing:-.026em;font-weight:500}
 .lead .w{opacity:var(--o,1);transition:opacity .25s linear}
 .js .lead .w{--o:.16}
-.members{grid-column:4/13;display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gutter);margin-top:clamp(48px,6vw,88px);border-top:1px solid var(--line);padding-top:18px}
-.member .alias{font-size:clamp(1.25rem,2vw,1.75rem);font-weight:600;letter-spacing:-.02em;line-height:1.1}
-.member .name{color:var(--ink-soft);font-size:.875rem;margin-top:6px}
 .frame{position:relative;overflow:hidden;margin:clamp(56px,8vw,120px) 0 0;
   clip-path:inset(var(--fy,0px) var(--fx,0px) var(--fy,0px) var(--fx,0px) round var(--fr,0px));will-change:clip-path}
 .frame img{width:100%;transform:scale(var(--fs,1));will-change:transform}
@@ -130,7 +127,14 @@ a{color:inherit}
 .st-grid{width:100%;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:var(--gutter)}
 .statement{font-size:clamp(2.6rem,6.2vw,6.25rem);line-height:.98;letter-spacing:-.045em;font-weight:600;margin:0}
 .statement span{display:block;width:max-content;max-width:100%;opacity:var(--a,.12);padding-bottom:.04em}
-.st-sub{margin-top:28px;color:#a9a9a9;max-width:40ch;font-size:1rem;opacity:var(--a,0)}
+.st-sub{margin-top:clamp(24px,3vw,40px);color:#a1a1a6;opacity:var(--a,0)}
+.st-copy{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,2.4vw,32px);max-width:640px;font-size:.9375rem;line-height:1.55}
+.st-copy p{margin:0}
+/* The one photograph: a full-bleed sheet that rises over the pinned statement */
+.photo{background:#e4e4e4;overflow:hidden}
+.photo figure{margin:0;position:relative}
+.photo img{width:100%;height:100svh;object-fit:cover;object-position:50% 40%;transform:scale(var(--ps,1.08));transform-origin:50% 40%;will-change:transform}
+.photo .cap{position:absolute;left:var(--gutter);bottom:clamp(18px,3vw,36px);display:flex;gap:18px;align-items:baseline;color:#fff;mix-blend-mode:difference}
 .st-count{position:absolute;left:var(--gutter);bottom:clamp(18px,3vw,36px);display:flex;gap:16px;align-items:center;color:#8d8d8d}
 .st-track{width:120px;height:1px;background:rgba(255,255,255,.2);position:relative;overflow:hidden}
 .st-track i{position:absolute;inset:0;background:#fff;transform-origin:left;transform:scaleX(var(--p,0))}
@@ -148,63 +152,13 @@ a{color:inherit}
 .tint.v{background-image:url(assets/tex-violet.jpg)}
 
 /* ---------- 04 Identity ---------- */
-.identity{background:var(--paper);padding:clamp(96px,12vw,180px) 0 0}
-.id-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter)}
-.id-head{grid-column:1/4}
-.id-body{grid-column:4/12}
-.id-cols{display:grid;grid-template-columns:1fr 1fr;gap:var(--gutter);font-size:1.0625rem;line-height:1.55;color:var(--ink-soft)}
-.id-cols p{margin:0 0 1em}
 /* Spec sheet instead of genre pills */
-.specs{margin:clamp(32px,4vw,56px) 0 0;border-top:1px solid var(--line)}
-.specs>div{display:grid;grid-template-columns:minmax(120px,1fr) 3fr;gap:var(--gutter);padding:16px 0;border-bottom:1px solid var(--hair)}
-.specs dt{font-weight:700;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:.3em}
-.specs dd{margin:0;font-size:clamp(1.0625rem,1.4vw,1.25rem);letter-spacing:-.012em;font-weight:500;line-height:1.35}
-.specs dd .sep{color:var(--muted);font-weight:400;padding:0 .35em}
-.portraits{margin-top:clamp(64px,8vw,120px);display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--paper)}
-.portraits figure{margin:0;overflow:hidden;aspect-ratio:3/4;background:#ddd}
-.portraits img{width:100%;height:100%;object-fit:cover;filter:grayscale(.15)}
-.portraits figure:nth-child(1) img{object-position:50% 30%;transform:scale(1.4);transform-origin:50% 30%}
 
 /* ---------- 05 Spectrum ---------- */
-.spectrum{display:grid;grid-template-rows:1fr 1fr;min-height:100svh;color:#fff}
-.band{position:relative;overflow:hidden;display:flex;align-items:center;min-height:50svh}
-.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.band .wrap{position:relative;z-index:1;width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px}
-.band h3{margin:0;font-size:clamp(1.9rem,4.8vw,4.6rem);line-height:.95;letter-spacing:-.042em;font-weight:600;max-width:12ch}
-.band p{margin:0;max-width:34ch;font-size:.9375rem;color:rgba(255,255,255,.85);text-align:right}
 
 /* ---------- 06 Bleed ---------- */
-.bleed{background:var(--paper)}
-.bleed .frame{margin:0}
-.bleed .frame img{height:min(110svh,1100px);object-fit:cover;object-position:50% 40%}
-.bleed .cap{position:absolute;left:var(--gutter);bottom:clamp(18px,3vw,36px);display:flex;gap:18px;align-items:baseline;color:#fff;mix-blend-mode:difference}
 
 /* ---------- 08 Live ---------- */
-.live{background:var(--paper-2);padding:clamp(96px,12vw,180px) 0}
-.live-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter);align-items:start}
-.live-copy{grid-column:1/7}
-.live-copy .display{margin-top:16px;margin-bottom:22px}
-.intro{font-size:clamp(1.125rem,1.6vw,1.375rem);line-height:1.4;max-width:36ch;color:var(--ink-soft);margin:0;letter-spacing:-.008em}
-.formats{margin-top:clamp(40px,5vw,72px);border-top:1px solid var(--line)}
-.format{border-bottom:1px solid var(--line)}
-.format button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;display:grid;grid-template-columns:64px 1fr auto;gap:18px;align-items:center;padding:26px 0}
-.format button:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:6px}
-.format h3{margin:0;font-size:clamp(1.5rem,2.4vw,2.1rem);letter-spacing:-.03em;font-weight:600;line-height:1}
-.plus{width:32px;height:32px;border-radius:50%;border:1px solid var(--ink);position:relative;transition:transform .6s var(--ease-out),background .4s var(--ease-out),color .4s}
-.plus::before,.plus::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:currentColor;transform:translate(-50%,-50%)}
-.plus::after{transform:translate(-50%,-50%) rotate(90deg)}
-.format[data-open="true"] .plus{transform:rotate(45deg);background:var(--ink);color:#fff}
-.panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .7s var(--ease-out)}
-.format[data-open="true"] .panel{grid-template-rows:1fr}
-.panel>div{overflow:hidden}
-.panel-in{padding:0 0 30px 82px;opacity:0;transition:opacity .5s var(--ease-out)}
-.format[data-open="true"] .panel-in{opacity:1;transition-delay:.1s}
-.panel p{margin:0 0 .8em;color:var(--ink-soft);font-size:1rem;max-width:58ch}
-.panel .specs{margin-top:18px}
-.panel .specs>div{grid-template-columns:90px 1fr;padding:12px 0}
-.panel .specs dd{font-size:1rem}
-.live-photo{grid-column:7/13;position:sticky;top:80px;margin:0;border-radius:var(--radius);overflow:hidden}
-.live-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:52% 42%;transform:scale(var(--ls,1.35));will-change:transform}
 
 /* ---------- 09 Contact + Footer ---------- */
 .contact{background:var(--ink);color:#f5f5f7;padding:clamp(96px,12vw,170px) 0 0;position:relative;overflow:hidden}
@@ -212,6 +166,7 @@ a{color:inherit}
 .contact .wrap{position:relative}
 .c-top{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gutter);align-items:end}
 .c-lead{grid-column:1/8}
+.display{margin:0;font-size:clamp(2.6rem,6.6vw,6.75rem);line-height:.92;letter-spacing:-.048em;font-weight:600}
 .c-lead .display{margin:16px 0 0;font-size:clamp(2.6rem,7vw,7rem)}
 .c-side{grid-column:9/13;color:#a1a1a6;font-size:1rem}
 .mail{display:inline-block;margin-top:clamp(40px,5vw,72px);font-size:clamp(1.6rem,4.6vw,4.5rem);font-weight:600;letter-spacing:-.035em;text-decoration:none;line-height:1;padding-bottom:12px;position:relative}
@@ -268,8 +223,7 @@ a{color:inherit}
 
 /* ---------- Responsive ---------- */
 @media (max-width:1024px){
-  .bio-head,.id-head,.bio-text,.id-body,.members,.live-copy,.c-lead,.c-side{grid-column:1/-1}
-  .live-photo{grid-column:1/-1;position:relative;top:0;order:-1}
+  .bio-head,.bio-text,.c-lead,.c-side{grid-column:1/-1}
 }
 @media (max-width:760px){
   .bar{grid-template-columns:auto 1fr auto;font-size:.6875rem}
@@ -287,24 +241,13 @@ a{color:inherit}
   .hero-meta p{font-size:1.0625rem;max-width:22ch}
   .scroll-cue{display:none}
 
-  .members{grid-template-columns:1fr;gap:16px}
-  .member{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--hair);padding-bottom:14px}
-  .member .name{margin:0;text-align:right}
   .bio .frame img{aspect-ratio:4/5;object-position:58% 60%}
   .statement-sec{height:320svh}
-  .st-grid{grid-template-columns:1fr;gap:8px}
-  .ring{order:-1;width:68vw}
-  .id-cols{grid-template-columns:1fr}
-  .specs>div{grid-template-columns:1fr;gap:4px;padding:14px 0}
-  .portraits{grid-template-columns:1fr 1fr}
-  .portraits figure:nth-child(1){grid-column:1/-1;aspect-ratio:4/3}
-  .portraits figure:nth-child(1) img{transform:scale(1.2)}
-  .band .wrap{flex-direction:column;align-items:flex-start}
-  .band p{text-align:left}
-  .bleed .frame img{height:auto;aspect-ratio:5/4}
-  .format button{grid-template-columns:28px 1fr auto;gap:12px}
-  .panel-in{padding-left:40px}
-  .panel .specs>div{grid-template-columns:1fr}
+  .st-grid{grid-template-columns:1fr;gap:4px}
+  .st-copy{grid-template-columns:1fr;gap:12px;font-size:.84rem;line-height:1.5}
+  .statement{font-size:clamp(2.2rem,11vw,3rem)}
+  .photo img{height:auto;aspect-ratio:4/5;object-position:62% 40%}
+  .ring{order:-1;width:min(46vw,34svh)}
   .row{grid-template-columns:1fr 40px;gap:6px 14px;padding:18px 0}
   .row .h{grid-column:1;grid-row:2;font-size:.875rem}
   .row .go{grid-column:2;grid-row:1/3;width:40px;height:40px}
@@ -326,7 +269,7 @@ a{color:inherit}
   .hero-mark .wm path{animation:none;opacity:1}
   .scroll-cue .ln::after{animation:none}
   .js .lead .w{--o:1}
-  .frame{clip-path:none}.frame img,.live-photo img{transform:none}
+  .frame{clip-path:none}.frame img,.photo img{transform:none}
   .wm-box{clip-path:none}.wm-inner{transform:none}
 }
 @media (prefers-reduced-transparency:reduce){
@@ -346,14 +289,9 @@ a{color:inherit}
 :root[data-theme="dark"] .bar{color:#f5f5f7}
 :root[data-theme="dark"] .bar::before{background:rgba(22,22,24,.62)}
 :root[data-theme="dark"] .pill{background:rgba(255,255,255,.14)}
-:root[data-theme="dark"] .plus{border-color:rgba(245,245,247,.7)}
-:root[data-theme="dark"] .format[data-open="true"] .plus{background:#f5f5f7;color:#000;border-color:#f5f5f7}
-:root[data-theme="dark"] .frame img,:root[data-theme="dark"] .live-photo img{filter:brightness(.9)}
-:root[data-theme="dark"] .portraits{background:#0b0b0c}
-:root[data-theme="dark"] .portraits img{filter:grayscale(.15) brightness(.9)}
-:root[data-theme="dark"] .portraits figure:hover img{filter:brightness(.95)}
-:root[data-theme="dark"] .live-photo{box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+:root[data-theme="dark"] .frame img{filter:brightness(.9)}
 :root[data-theme="dark"] .contact{background:#000}
+:root[data-theme="dark"] .photo img{filter:brightness(.9)}
 :root[data-theme="dark"] .sheet{box-shadow:0 -1px 0 rgba(255,255,255,.08),0 -24px 60px -24px rgba(0,0,0,.6)}
 :root[data-theme="dark"] .skip{background:#f5f5f7;color:#000}
 @media (prefers-reduced-transparency:reduce){:root[data-theme="dark"] .bar::before{background:#0b0b0c}}
@@ -369,13 +307,10 @@ a{color:inherit}
 
 <header class="bar" id="bar">
   <a class="brand press" href="#top">Memoria</a>
-  <span class="epk">EPK</span>
   <span class="rule" aria-hidden="true"></span>
   <nav aria-label="Sections" id="nav">
     <span class="pill" id="pill" aria-hidden="true"></span>
     <a class="press" href="#bio" data-target="bio">Bio</a>
-    <a class="press" href="#sound" data-target="sound">Sound</a>
-    <a class="press" href="#live" data-target="live">Live</a>
     <a class="press" href="#contact" data-target="contact">Contact</a>
   </nav>
   <span>2026</span>
@@ -392,7 +327,7 @@ a{color:inherit}
       <div class="hero-card" id="heroCard">
         <img src="assets/hero-orange.jpg" alt="The three members of MEMORIA in motion blur against an orange backdrop" fetchpriority="high">
         <div class="hero-meta" id="heroMeta">
-          <p>Sound, emotion and memory — Melodic &amp; Progressive House from Italy.</p>
+          <p>Memoria — Progressive house collective from Italy.</p>
           <a class="scroll-cue label press" href="#bio"><span>Scroll</span><span class="ln" aria-hidden="true"></span></a>
           <span class="idx">01</span>
         </div>
@@ -411,29 +346,24 @@ a{color:inherit}
         <div class="bio-text">
           <p class="lead" id="lead">MEMORIA is the artistic convergence of three Italian DJs, producers and musicians — brought together by a deep-rooted friendship and years of creative synergy in the studio. Built on a shared musical vision, the project explores the relationship between sound, emotion and memory, translating personal experiences and shared moments into a distinctive musical language.</p>
         </div>
-        <div class="members">
-          <div class="member reveal"><div class="alias">Delayers</div><div class="name">Federico Bombini</div></div>
-          <div class="member reveal d1"><div class="alias">Jamis</div><div class="name">Iacopo Misuri</div></div>
-          <div class="member reveal d2"><div class="alias">sorrynotsimon</div><div class="name">Simone Giacomini</div></div>
-        </div>
       </div>
     </div>
-    <figure class="frame" data-frame>
-      <img src="assets/trio-studio.jpg" alt="MEMORIA seated on studio speakers, dressed in black against a light grey backdrop" loading="lazy" width="2400" height="1920">
-    </figure>
   </section>
 
   <!-- 03 STATEMENT (pinned) -->
-  <section class="statement-sec" id="statement" data-theme="dark" aria-label="Statement">
+  <section class="statement-sec" id="statement" data-theme="dark" aria-label="Memoria. Beyond. Time.">
     <div class="st-stage">
       <div class="wrap st-grid">
         <div>
           <p class="statement" id="words">
-            <span class="tex-s">Sound.</span>
-            <span class="tex-o">Emotion.</span>
-            <span class="tex-v">Memory.</span>
+            <span class="tex-s">Memoria.</span>
+            <span class="tex-o">Beyond.</span>
+            <span class="tex-v">Time.</span>
           </p>
-          <p class="st-sub" id="stSub">Personal experiences and shared moments, translated into music that moves between introspection and dancefloor energy.</p>
+          <div class="st-sub st-copy" id="stSub">
+            <p>Rooted in Melodic and Progressive House, MEMORIA combines driving rhythms with poignant piano melodies, immersive synth textures and carefully crafted vocal elements. Select productions also incorporate subtle influences from Maccabi House, adding further character to their evolving sound.</p>
+            <p>Vocals play a central role in the trio’s sonic identity. Carefully selected and shaped through melodic phrasing and lyrical expression, they bring emotional depth to each composition, transforming individual tracks into immersive, memorable experiences.</p>
+          </div>
         </div>
         <div class="ring" id="ring">
           <img src="assets/chrome-ring.jpg" alt="" width="1254" height="1254">
@@ -446,112 +376,21 @@ a{color:inherit}
     </div>
   </section>
 
-  <!-- 04 IDENTITY -->
-  <section class="section identity sheet" id="sound" data-theme="light">
-    <div class="wrap">
-      <div class="id-grid">
-        <div class="id-head">
-          <div class="label">Musical Identity</div>
-          <div class="idx" style="margin-top:8px;color:var(--muted)">04</div>
-        </div>
-        <div class="id-body">
-          <h2 class="display">Evocative.<br>Cinematic.</h2>
-          <div class="id-cols">
-            <div class="reveal">
-              <p>Rooted in Melodic and Progressive House, MEMORIA combines driving rhythms with poignant piano melodies, immersive synth textures and carefully crafted vocal elements. Select productions also incorporate subtle influences from Maccabi House, adding further character to their evolving sound.</p>
-            </div>
-            <div class="reveal d1">
-              <p>Vocals play a central role in the trio’s sonic identity. Carefully selected and shaped through melodic phrasing and lyrical expression, they bring emotional depth to each composition, transforming individual tracks into immersive, memorable experiences.</p>
-            </div>
-          </div>
-          <dl class="specs reveal">
-            <div><dt>Genre</dt><dd>Melodic House<span class="sep">/</span>Progressive House</dd></div>
-            <div><dt>Influences</dt><dd>Maccabi House</dd></div>
-            <div><dt>Signature</dt><dd>Piano melodies, immersive synth textures, crafted vocals</dd></div>
-            <div><dt>Mood</dt><dd>From darker, hypnotic atmospheres to expansive, uplifting moments</dd></div>
-          </dl>
-        </div>
-      </div>
-    </div>
-    <div class="portraits">
-      <figure><img src="assets/portrait-1.jpg" alt="Portrait of a MEMORIA member with bleached hair and grey beard" loading="lazy"></figure>
-      <figure><img src="assets/portrait-2.jpg" alt="Portrait of a MEMORIA member with dark curly hair" loading="lazy"></figure>
-      <figure><img src="assets/portrait-3.jpg" alt="Portrait of a MEMORIA member wearing dark sunglasses" loading="lazy"></figure>
-    </div>
-  </section>
-
-  <!-- 05 SPECTRUM -->
-  <section class="section spectrum" data-theme="dark" aria-label="Sound spectrum">
-    <div class="band">
-      <img src="assets/grad-violet.jpg" alt="" loading="lazy">
-      <div class="wrap">
-        <h3>Darker, hypnotic atmospheres</h3>
-        <p>Underground, introspective territory — where the set begins.</p>
-      </div>
-    </div>
-    <div class="band">
-      <img src="assets/grad-orange.jpg" alt="" loading="lazy">
-      <div class="wrap">
-        <h3>Expansive, uplifting moments</h3>
-        <p>Expansive melodies and liberating synths — where it opens up.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 06 BLEED -->
-  <section class="bleed" data-theme="light" aria-label="Photo">
-    <figure class="frame" data-frame>
-      <img src="assets/trio-bw.jpg" alt="Black and white photo of the three members of MEMORIA standing beside a keyboard and cables" loading="lazy">
-      <div class="cap"><span class="label">Memoria</span><span class="idx">06</span></div>
+  <!-- 04 PHOTO (sheet over the pinned statement) -->
+  <section class="photo sheet" id="photo" data-theme="light" aria-label="Photo">
+    <figure>
+      <img id="photoImg" src="assets/trio-bw.jpg" alt="Black and white photo of the three members of MEMORIA standing beside a keyboard and cables" loading="lazy">
+      <figcaption class="cap"><span class="label">Memoria</span><span class="idx">04</span></figcaption>
     </figure>
   </section>
 
-  <!-- 08 LIVE -->
-  <section class="section live" id="live" data-theme="light">
-    <div class="wrap live-grid">
-      <div class="live-copy">
-        <div class="label">Live Experience <span class="idx" style="color:var(--muted);margin-left:10px">08</span></div>
-        <h2 class="display">Two ways<br>to listen.</h2>
-        <p class="intro reveal">MEMORIA presents its music through two distinct performance formats, each offering a different way to experience the project’s sonic identity.</p>
-
-        <div class="formats">
-          <article class="format" data-open="true">
-            <button aria-expanded="true" aria-controls="fmtA">
-              <span class="idx">A</span><h3>Classic DJ Set</h3><span class="plus" aria-hidden="true"></span>
-            </button>
-            <div class="panel" id="fmtA"><div><div class="panel-in">
-              <p>Conceived as carefully structured sonic journeys rather than simple sequences of tracks. Guided by emotional progression and a strong sense of musical flow, their performances move from darker, introspective and underground territories towards expansive melodies and liberating synths.</p>
-              <p>Whether performing their own productions or music from other artists, MEMORIA builds a cohesive narrative designed to connect with the audience and evolve naturally throughout the set.</p>
-            </div></div></div>
-          </article>
-          <article class="format" data-open="false">
-            <button aria-expanded="false" aria-controls="fmtB">
-              <span class="idx">B</span><h3>Hybrid Set</h3><span class="plus" aria-hidden="true"></span>
-            </button>
-            <div class="panel" id="fmtB"><div><div class="panel-in">
-              <p>Blending a traditional DJ setup with live instrumentation, the hybrid format brings together CDJs, mixer, effects and live synthesizers or controllers.</p>
-              <p>Moving beyond conventional DJ performance, the trio integrates live interpretations of their own compositions with improvisation and real-time manipulation of sound — a dynamic performance that evolves with the moment, allowing each show to take on its own character.</p>
-              <dl class="specs">
-                <div><dt>Setup</dt><dd>CDJs<span class="sep">/</span>Mixer<span class="sep">/</span>Effects</dd></div>
-                <div><dt>Live</dt><dd>Synthesizers<span class="sep">/</span>Controllers</dd></div>
-              </dl>
-            </div></div></div>
-          </article>
-        </div>
-      </div>
-      <figure class="live-photo" id="livePhoto">
-        <img src="assets/hybrid.jpg" alt="Top-down view of MEMORIA with synthesizers, a laptop and tangled cables on the floor" loading="lazy">
-      </figure>
-    </div>
-  </section>
-
-  <!-- 09 CONTACT -->
+  <!-- 05 CONTACT -->
   <section class="section contact" id="contact" data-theme="dark">
     <div class="wrap">
       <div class="c-top">
         <div class="c-lead">
-          <div class="label">Bookings &amp; Enquiries <span class="idx" style="color:#8d8d8d;margin-left:10px">09</span></div>
-          <h2 class="display">Let’s create something memorable.</h2>
+          <div class="label">Bookings &amp; Enquiries <span class="idx" style="color:#8d8d8d;margin-left:10px">05</span></div>
+          <h2 class="display">Feel something real.</h2>
         </div>
         <p class="c-side reveal">For bookings, collaborations and general enquiries, get in touch with MEMORIA.</p>
       </div>
@@ -577,8 +416,8 @@ a{color:inherit}
           <nav class="col reveal d1" aria-label="Footer">
             <h4>Explore</h4>
             <a href="#bio">Biography</a>
-            <a href="#sound">Musical identity</a>
-            <a href="#live">Live experience</a>
+            <a href="#statement">Memoria</a>
+            <a href="#contact">Contact</a>
           </nav>
           <div class="col reveal d2">
             <h4>Listen &amp; follow</h4>
@@ -662,7 +501,7 @@ a{color:inherit}
   const st = $('#statement'), stWords = $$('#words span'), stSub = $('#stSub'), stTrack = $('#stTrack');
   const ring = $('#ring'), sheen = $('#sheen'), tintO = $('#tintO'), tintV = $('#tintV');
   const frames = $$('[data-frame]');
-  const livePhoto = $('#livePhoto'), liveImg = $('img', livePhoto);
+  const photoImg = $('#photoImg');
   const wmBox = $('#wmBox'), wmInner = $('.wm-inner', wmBox);
   const themed = $$('[data-theme]');
   const navLinks = $$('a', nav);
@@ -699,7 +538,7 @@ a{color:inherit}
     { const [p, c] = scene(st); sSt.set(p); sStCov.set(c); sLight.set(p + pointerLight);
       sStIn.set(clamp((vh - st.getBoundingClientRect().top) / vh)); }
     frames.forEach((f, i) => { const r = f.getBoundingClientRect(); sFrames[i].set(clamp((vh - r.top) / (vh * 0.9))); });
-    sLive.set(through(livePhoto));
+    sLive.set(through(photoImg));
     { const r = wmBox.getBoundingClientRect(); sMark.set(clamp((vh - r.top) / (vh * 0.75))); }
     { const r = lead.getBoundingClientRect(); sLead.set(clamp((vh * 0.82 - r.top) / (r.height + vh * 0.35))); }
 
@@ -794,7 +633,7 @@ a{color:inherit}
     {
       const p = sSt.value;
       stWords.forEach((w, i) => w.style.setProperty('--a', lerp(0.12, 1, ease(range(p, 0.06 + i * 0.24, 0.26 + i * 0.24)))));
-      stSub.style.setProperty('--a', ease(range(p, 0.78, 0.96)));
+      stSub.style.setProperty('--a', ease(range(p, 0.74, 0.94)));
       stTrack.style.setProperty('--p', p);
       const m = reveal(range(sStIn.value, 0.25, 1));  // the ring arrives with the section, before it pins
       ring.style.setProperty('--ro', m);
@@ -805,7 +644,7 @@ a{color:inherit}
       tintV.style.setProperty('--to', 0.42 * range(p, 0.52, 0.66));
     }
 
-    liveImg.style.setProperty('--ls', lerp(1.42, 1.22, ease(sLive.value)));
+    photoImg.style.setProperty('--ps', lerp(1.08, 1, inOut(range(sLive.value, 0, 0.5))));
     { const m = sMark.value, e = reveal(range(m, 0, 0.6));
       wmBox.style.setProperty('--wc', lerp(100, 0, e) + '%');
       wmInner.style.setProperty('--my', lerp(36, 0, e) + '%'); }
@@ -904,10 +743,6 @@ void main(){
     c.addEventListener('webglcontextlost', e => { e.preventDefault(); ready = false; c.remove(); });
   })();
 
-  $$('.format button').forEach(btn => btn.addEventListener('click', () => {
-    const f = btn.closest('.format'), open = f.dataset.open !== 'true';
-    f.dataset.open = open; btn.setAttribute('aria-expanded', open);
-  }));
 
   let raf = 0, last = 0;
   function tick(t) {
