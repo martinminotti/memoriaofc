@@ -2,6 +2,9 @@
 
 RewriteEngine On
 
+# Branded not-found page
+ErrorDocument 404 /404.html
+
 # One address only: https://memoriaofc.com (no http, no www)
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
